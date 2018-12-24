@@ -1,0 +1,59 @@
+ ****useradd script**** 
+
+#!/bin/bash
+for i in $@
+do
+useradd $i
+echo "username $i create successfully!"
+echo $i"123" | passwd --stdin "$i"
+echo "passwd created for user $i"
+done
+-------------------------------------------------
+
+vim user.txt
+ab ---- names of the users
+cd
+ef
+gh
+ij
+#!/bin/bash
+for i in 'more user.txt'
+do
+useradd $i
+echo "username $i create successfully!"
+echo $i"123" | passwd --stdin "$i"
+echo "passwd created for user $i"
+
+done
+--------------------------------------------------
+cmd >filename
+cmd 2> "
+cmd &> "
+/dv/null
+/dev/zero
+< 0
+> 1
+2> 2
+
+----------------------------------------------------
+logical OR -o ||
+logical AND -a &&
+------------------------------------------------------
+cmd1 && cmd2 || cmd 2
+if cmd1 true exec cmd2 else exec cmd2
+---------------------------------------------------------
+test -- 
+used to check file type 
+it is used in conditional execution
+used for file attribute comparision string comparisons and basic arthematic comaparisons
+
+syntax:
+test condition && condition
+or
+test condition && condition || condition
+a=10
+b=30
+test $a -ne $b && echo "hello" || echo "hi"
+----------------------------------------------------------
+ 
+

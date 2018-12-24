@@ -1,0 +1,45 @@
+for loop
+example
+for 1 in 1 2 3 4 5 
+do 
+echo "value:$i"
+done
+---------------------------------------------------
+while loop
+it executes the loop till the condition is true.
+when condition becomes false loop terminates.
+
+while [ expression ]
+do
+//statements
+done
+
+#!/bin/bash
+var=1
+while [ $var -le 10 ]
+do
+echo "loop $var"
+(( var++ ))
+done
+----------------------------------------------------
+until loop
+it executes the loop till the condition is false. when condition becomes true loop terminates.it is exact opposite to whilw loop
+
+until [ expression ]
+do
+//statement
+done 
+
+#!/bin/bash
+var=1
+untill [ $var -gt 10 ]
+do
+echo "loop $var"
+(( var++ ))
+done
+----------------------------------------------------
+** untill loop vs while loop
+
+untill loop executes untill a non zero status is return
+while loop executes untill zero status is returns
+untill always executes atleast once

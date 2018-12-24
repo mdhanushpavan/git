@@ -1,0 +1,60 @@
+    			command substitution
+run a shell command and store its o/p to a variable or display back using echo cmd
+(ls -l;df -h;uptime;w;who) >> file
+
+eg: echo "todays date is:" 'date'
+or
+echo "todays date is: $(date)"
+
+var = $(ls -l;df -h;uptime;w;who)
+echo $var
+-----------------------------------------------------------------------------------
+HERE DOCUMENT:
+this type of redirection tells the shell to read input from the current source (here) untill a line containing only word here
+syntax:
+cmd <<HERE
+text
+text
+text
+$var
+HERE
+
+/bin/bash <<HERE
+>hello
+>date
+>uptime
+>HERE
+
+/bin/bash <<SURESH
+>w
+>uptime
+>uname -r
+>cat /etc/os-release
+>SURESH
+
+ssh user@IP shellcmd;shellcmd
+ssh user@IP shellcmd && shellcmd || shellcmd
+ssh user@IP shellcmd || shellcmd
+-------------------------------------------------------------------------------------
+
+printf is just like an echo
+ex:
+var=$uptime
+printf $var
+
+var=$(uptime)
+printf "%s\n" $var
+#!/bin/bash
+CDUSAGE=$( df -h / | grep / | awk '{print $5}' | sed 's/%//' )
+test $CUSAGE -ge 70 && echo "Disk usage crirtical!" || echo "disk filesystem current usage $CDUSAGE"
+
+
+
+#!/bin/bash
+CDUSAGE=$( df -h / | grep / | awk '{print $5}' | sed 's/%//' )
+test $CUSAGE -ge 70 && mail -s 'disk usage alert' root@localhost.com <<HERE curent disk ussage $CDUSAGE 
+date: $(date)
+hsotname: $(hostname) 
+HERE
+
+

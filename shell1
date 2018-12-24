@@ -1,0 +1,59 @@
+top 
+htop 
+free  -- memory utilization 
+free -s 
+vmstat
+iostat
+free
+ps
+sar
+/proc --  contains running system informatiom (it is a virtual file system)
+
+
+how to audit the mission in critical situation
+
+collect mem, cpu, process of the server
+see which process is taking more ram and then terminate the machine..
+
+
+shell scripting
+
+OS  - os are made up of many components, it acts as an interface between user and hardware.
+there are two main components i.e., kernal and shell.
+
+Kernal - it is a core part of the operating system. it makes the commucation between software and hardware.
+          - memory mngmnt
+		  - cpu mngmnt
+		  - disk mngmnt
+		  - user mngmnt
+		  - IO mngmnt
+		  - scheduling
+		  - security
+		  
+shell - it acts as an interface between user and kernel, known as interpreter..
+         shell build on top of kernel and enables users to run services provided by the OS.
+		 
+		 
+		 if we run a command it will look into bin or sbin or usrbin binary files of the cmd
+		 fork ()
+		 exec ()
+		 
+when we run cmd shell finds binary file of the command and runs command, we will receive the output
+to interact with the kernal terminals are used.
+the kernal names are like genome terminals..
+
+types of shell scritings: bourne shell
+bourne shell
+                          c shell
+						  korn shell
+						  torbo/tenex
+
+echo $SHELL
+chsh -l
+cat /etc/shell
+
+
+to swith shell: by just typing the name of the shell like $bash, $sh, $exec bash, $exec sh
+run exit cmd to come back to previous shell..
+
+

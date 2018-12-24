@@ -1,0 +1,21 @@
+BACKUPS USING SCRIPTS:
+
+1. full backups - 
+2. diff
+3. incremental
+
+pscp - to copy files parallely to remote machines 
+pssh - to run commands parallely to remote machines
+
+vagrant -- vargent is a open source tool to work with virtual machines for building and managing virtualised environments inorder to reduce dev environment setup time, increase development environment productivity, production parity.. 
+it supports a range of virtualization providers and provisioning frameworks for configuration management
+
+provisioner is a tool to setup the environment, that can be a shell script, ansible, pupet, cheff etc..
+vagrent is installed on a host machine to create guest virtual machines from base boxes such as centos, ubuntu etc.
+vagrent acts as a wrapper around a provider.
+what is a box?
+a box is a packaged vagrent environment, typically a virtual machine.
+
+prerequasites -
+1. virtual box
+2. vagrant

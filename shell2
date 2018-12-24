@@ -1,0 +1,135 @@
+debug a script:
+bash -x script-name
+bash -xv script-name
+
+shell variables:
+shell avriables are symbolic names that can access values stored in memory
+
+what is a varibles:
+a variable is a location for storing a value which can be a file name, text, no or any other data.
+the value stored can be displayed deleted, edited, and resaved.
+
+rules for naming varible name?
+the name of the variable can contain only letters, no's, underscore(_) character.
+the variables will have there names in upper case.
+variables names must be biggen with alphs numaric character or '_' character, FOLLOWED by one or more alphs numaric or '_' character.
+
+ex: TEST, TEST_VERSION SRCPATH, DSTPATH
+
+Variable names are chase sensitive jus like file names.
+we can define a null variable AS FALLOWES
+
+defining variables:
+syntax = "cariable_name=variable_value"
+
+to access the value stored in a variable prefix it's name with the DOLLER ($) sign 
+
+	TEST="HEllO TEST"
+	echo $TEST
+
+--->definig read only variable:
+	shell offers a way to mark variables of read-only by using readonly command
+
+--->unset or delete variables?
+    once we unset a variable, we cannot access the stored value in the variable.
+	to unset a defined variable use unset cmd.
+
+	variable types:
+	system variables -- this variables created and maintained by operating system itself.
+	when we login therer will be a huge no of GLOBAL SYSTEM variables that are already defined.
+	this can be freely referenced and use in our scripts.
+	
+	user defined variables: -- this variables are created and maintained by user
+	
+	special variables -- this variables are reserved for OS, shell programming etc.
+	
+	To see list of environment variables -- printenv OR env
+	Local env variables: A local variable defined for the current session. within a shell script we can create as many new variables as needed.
+	any variable ctreated in this manner remanides in existance only within that shell..
+	
+	User env variables: this variables are defined for a particular user and loaded every time a user logs in using a local 
+	terminal session or remote login session.
+	this variables are typically sset in and loaded from following configuration files.
+	
+	.bashrc
+	.bash_profile
+	.bash_login
+	.profile
+	which are present in user home directory.
+	
+	system wide environment : this variables are available system wide.. i.e., for all the users present in the system.
+	this variables are resides in system wide configuration files and directories like 
+	
+	/etc/bashrc
+	/etc/profile
+	/etc/environment
+	/etc/profile.d
+	this variables are loaded everytime system is rebooted & loged in either locally or remotely by any user.
+	
+	.bashrc -- understanding user wide and system wide configuration files.
+	           this file is user specific file that gets loaded each time user creats a new local login session.
+			   All environmental variables created in this file would take effect every time a new local session started.
+	
+	.bash_profile -- This file is user specific remote login file. environment variables listed or defined in this file are
+					 invoked everytime the user is logged in remotely. i.e., using SSH session. If this file is not present system looks for either ".bash_login or .profile files"
+					 
+	/etc/bashrc -- This file is system wide environment file. this file is loaded once for every user, each time that user
+				   opens a local terminal session..
+				   
+	/etc/profile --- It is a system wide profile file. all variables created in /etc/profile are accessable by every user on
+					 the system, but only if that user session invoket remotely.. i.e., via SSH
+					 any variable in this file will not be accessable for loacl login session.
+					 
+	/etc/environment -- this file is system wide file for creating, editing or removing any environment variables.
+	                    Environment variables created in this file are accessable all throughout the system by each and every user both locally and remotely.
+						
+						
+	SOURCE -- to export the modified configuration files to update the service.
+	Synatx: source <Filename>
+	
+	Export -- using expport command we can export shell variables.
+	Syntax: export variable-name= "value of variable"
+	
+	export -p -- to see list of all exported variables and functions
+	
+	common environment variables:  
+	
+					PATH
+					SHELL
+					HOME
+					User
+					PWD
+					HOSTNAME
+					MAIL
+					TERM
+					HISTFILESIZE
+					OSTYPE
+					LANG
+					HISTSIZE
+					
+	POSTIONAL PARAMETERS OR SPECIAL VARIABLES: 
+	             when a shell script is invoked with a set of command line parameters each of this parameters are copied into special variables, that can be accessed
+				 
+				 $* --  it denotes all parameters passed to the script, at the time of its execution.
+				 $1, $2, $3, ... and so on..............................
+				 $0 -- name of the shell script is being executed.
+$1, $2, $3, ... so on -- is 1st, 2nd, 3rd parameters
+				 $# --- no of arguments specified in the cmd line...
+				 $? --- it returns previous or (last) cmd exit status..
+				 $$ --- it returns current shell process id   
+to change new shell -sh
+				 $! --- it returns the process no of the last bg command
+				 $@ --- it reps all the arguments for individually double coated.
+						if a script receives more than 2 arguments $@ = $1, $2
+						
+				read command --  we can accept i/p from the keybpard and assign an i/p value to a user defined shell variable.
+				
+				read -p 
+				
+				#! /bin/bash
+				read -p "Enter Pkg Name:" PKG
+				yum insatll $PKG -yum
+				read -p "Enter Service Name:" SER
+				systemctl enable $SER
+				systemctl start $SER
+				systemctl status $SER

@@ -1,0 +1,40 @@
+22 DEC 2018   SHELL SCRIPT
+
+yum install httpd php php-mysql mariadb-server wget git -y
+systemctl enable httpd mariadb
+systemctl start httpd mariadb
+
+create a virtual host file
+echo "<VirtualHost *:80>
+DocumentRoot /var/www/html
+</VirtualHost>" >> /etc/httpd/conf.d/vhosts.conf
+
+CHKVER=$(cat /etc/*-release | head -1 | cut -d " " -f 1)
+if [ $CHKVER -eq CentOS ]
+then
+echo "Executing Centos Command"
+
+#configure root user for DB
+mysqladmin -u root password qwerty
+
+
+grant all privileges cmd
+dbase="create database mydb;grant all privileges on mydb.* to 'pavan'@'%.%.%.%' identified by 'qwerty';flush privileges;"
+
+echo  $dbase | mysql -u root -p
+
+#wordpress
+wget https://wordpress.org/latest.tar.gz
+tar -xf latest.tar.gz
+cp wordpress/* /var/www/html/
+cd /var/www/html
+cp wp-config-sample.php wp-config.php
+
+#replacing DB parameters on wp-config.php
+sed -i "s/database_name_here/mydb/" wp-config.php
+sed -i "s/username_here/mydb/" wp-config.php
+HOST='hostname-I'
+sed -i "s/loaclhost/HOST/" wp-config.php
+
+echo "*** WORDPRESS IS ESTABLISHED AND READY TO USE ***" 
+fi

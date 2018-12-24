@@ -1,0 +1,47 @@
+			relational operators:
+
+-eq if the values of two operands are equal then condition becomes true
+
+'expr [ $a -eq $b ]
+
+-ne -- not equals
+if the value of two operands are not equal then condition becomes true or false 
+
+'expr [ $a -ne $b ]'
+
+-gt -- greater than
+
+if the value of left operand is greater than right operand condition becomes true.
+'expr [ $a -gt $b ]'
+
+-lt -- less than
+if the value of left operand is less than right operand condition becomes true.
+'expr [ $a -lt $b ]'
+
+-ge -- greater than or equals
+if the value of left operand is greater than or equals to right operand condition becomes true.
+'expr [ $a -ge $b ]'
+
+-le -- less than or equals
+if the value of left operand is less than or equals to right operand then condition becomes true.
+'expr [ $a -le $b ]'
+
+df -h | head -2 | grep / | tr -s " " | cut -d " " -f5 | sed 's/%//'
+
+! this inverts a true condition into false and a false condition into true..
+[!true]
+[!false]
+
+-o logical OR
+any condition must be true
+[ cnd1 -o cnd 2]
+[ $a -eq $b -o $a -gt $b ]
+
+-a logical AND
+both conditions must be true -- if both operands are true then condition become true else false..
+a=10
+b=20
+[ $a -eq $b -o $a -gt $b ] -- true
+[ $b -gt $a -a $a -lt $b ] -- true  
+
+
