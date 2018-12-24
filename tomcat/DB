@@ -1,0 +1,38 @@
+– name: Ensure MariaDB is running (and enable it at boot)
+service: name=mariadb state=started enabled=yes
+
+– name: Copy ~/.my.cnf to nodes
+copy: src=/root/.my.cnf dest=/root/.my.cnf
+
+– name: Create MariaDB database
+mysql_db: name={{ wp_mysql_db }} state=present
+
+– name: Create MariaDB username and password
+mysql_user:
+login_user=root
+login_password=passforansible
+name={{ wp_mysql_user }}
+password={{ wp_mysql_password }}
+priv=*.*:ALL
+-----------------------------------------------------------
+Create the /etc/ansible/playbooks/wp-dependencies/defaults/main.yml file and add the following lines (db name, username and password is using for WordPress connect):
+—
+# defaults file for wp-dependencies
+wp_mysql_db: MyWP
+wp_mysql_user: wpUser
+wp_mysql_password: wpP4ss
+-----------------------------------------------------------
+Add the following lines to the /etc/ansible/playbooks/wp-install-config/tasks/main.yml file:
+—
+# tasks file for wp-install-config
+– name: Create directory to download WordPress
+command: mkdir -p /opt/source/wordpress
+
+– name: Download WordPress
+get_url: url=https://www.wordpress.org/latest.tar.gz dest=/opt/source/wordpress/wordpress.tar.gz validate_certs=no
+
+– name: Extract WordPress
+command: “tar xzf /opt/source/wordpress/wordpress.tar.gz -C /var/www/html –strip-components 1”
+
+– name: Send config file
+copy: src=/root/wp-config-sample.php dest=/var/www/html/wp-config.php mode=0644

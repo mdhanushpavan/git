@@ -1,0 +1,30 @@
+ tasks:
+    - name: Install MYSQL
+      yum:
+        name: mariadb-server #debian: mysql-server
+        state: present
+    - name: Install the Python MySQL Support Libraries
+      yum: pkg=MySQL-python state=latest
+    - name: start mysql server and enable it on reboot
+      service: name=mariadb state=started enabled=true #debian: mysql
+    - name: update mysql root password for all root accounts
+      mysql_user:
+        name: root
+        host: %.%.%.%
+        password: passwd
+        login_user: root
+        login_password: passwd
+        check_implicit_admin: yes
+        priv: "*.*:ALL,GRANT"
+		
+    - name: Copy the root credentials as .my.cnf file
+      template: src=root/.cnf.j2 dest=~/.my.cnf mode=0600
+    - name: Create a New Test DB called MyNewDB
+      mysql_db: name=MyNewDB state=present login_user=root login_password=passwd
+	  
+	  
+	  
+vim .my.cnf place it in templets
+[client]
+user=root
+pass=passwd

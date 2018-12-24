@@ -1,0 +1,25 @@
+Sonatype Nexus Repository
+ Wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+ 
+ tar -xvf latest-unix.tar.gz
+ rename the directory to nexus
+ useradd -r -md /opt/nexus nexus
+ chown -R nexus.nexus nexus sonatype-work
+ cahnge RUN_AS_USER="nexus_user" on nexus.rc
+ then run nexus script ./nexus start
+
+Nexus Repository plugin
+
+-- add nexus platform to jenkins
+then go to manage jenkins --> configuration find "sonartype Nexus"
+add Nexus Repository Manager 3.x Server
+give in the necessary data and save
+
+
+configure nexus repo to add artifacts to nexus Repository 
+
+go to build -- Add Build Step
+Add Instance, Repository then click on Add Packages
+Group, Artifacts we will find in pom.xml file which is present in github code
+Add Maven Artifacts -- Give the file Path
+Save and build now
